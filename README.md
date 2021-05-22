@@ -7,4 +7,5 @@
 Third task (coursework) for credit.
 
 Also implemented tests for logic_pack: (GameBoard, Logic classes).
+
 One fxml file is used "main.fxml".
