@@ -1,6 +1,5 @@
 package logic_pack;
 
-import java.io.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,11 +20,11 @@ public class TestLogic {
         String path1 = "assets/2.png";
         Assert.assertEquals(path1, path);
 
-        int numberCells = 2;
+        int numberCells = 0;
         int[][] board = Logic.gameBoard.board;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == 4) numberCells++;
+                if (board[i][j] == 2) numberCells++;
             }
         }
         Assert.assertEquals(2, numberCells);
@@ -35,6 +34,9 @@ public class TestLogic {
     public void testChoiceCell() {
         Logic.initialState();
         Logic.choiceCell();
+        Logic.choiceCell();
+        Logic.choiceCell();
+        Logic.choiceCell();
         int numberCells = 0;
         int[][] board = Logic.gameBoard.board;
         for (int i = 0; i < board.length; i++) {
@@ -42,7 +44,7 @@ public class TestLogic {
                 if (board[i][j] == 2) numberCells++;
             }
         }
-        Assert.assertEquals(1, numberCells);
+        Assert.assertEquals(4, numberCells);
     }
 
     @Test
