@@ -98,7 +98,6 @@ public class Logic {
             case RIGHT:
                 for(int i = 0; i< numberCellsY; i++){ // Shift the numbers of all rows in the desired direction in turn
                     int[] row = gameBoard.getLine(i); // Request the next row
-                    /*В зависимости от направления сдвига, меняем или не меняем порядок чисел на противоположный*/
                     if(direction==Direction.RIGHT){
                         int[] tmp = new int[row.length];
                         for(int e = 0; e < tmp.length; e++){
