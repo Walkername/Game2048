@@ -33,25 +33,23 @@ public class Logic {
         int randomX, randomY;
 
         randomX = new Random().nextInt(numberCellsX); // random coordinate X
-        int currentX = randomX; // TODO
 
         randomY = new Random().nextInt(numberCellsY); // random coordinate Y
-        int currentY = randomY; // TODO
 
         boolean busy = false;
         while(!busy){
-            if(gameBoard.getState(currentX, currentY) == 0) { // if the state of the game board in these coordinates isn't busy,
-                gameBoard.setState(currentX, currentY, state); // then we assign it the value "2"
+            if(gameBoard.getState(randomX, randomY) == 0) { // if the state of the game board in these coordinates isn't busy,
+                gameBoard.setState(randomX, randomY, state); // then we assign it the value "2"
                 busy = true;
             }else{
-                if(currentX+1 < numberCellsX) {
-                    currentX++;
+                if(randomX +1 < numberCellsX) {
+                    randomX++;
                 }else{
-                    currentX = 0;
-                    if(currentY+1 < numberCellsY) {
-                        currentY++;
+                    randomX = 0;
+                    if(randomY +1 < numberCellsY) {
+                        randomY++;
                     }else{
-                        currentY = 0;
+                        randomY = 0;
                     }
                 }
             }
@@ -106,7 +104,7 @@ public class Logic {
                         row = tmp;
                     }
                     /*Пытаемся сдвинуть числа в этом столбце*/
-                    ShiftResult result = shift(row); // TODO
+                    ShiftResult result = shift(row);
                     /*Возвращаем линию в исходный порядок*/
                     if(direction==Direction.RIGHT){
                         int[] tmp = new int[result.modRow.length];
