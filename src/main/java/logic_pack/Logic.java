@@ -66,7 +66,6 @@ public class Logic {
                         int[] revColumn = new int[column.length]; // reverse column
                         for(int j = 0; j < revColumn.length; j++){
                             revColumn[j] = column[revColumn.length- j -1];
-                            System.out.println(revColumn[j]);
                         }
                         column = revColumn; // Get the column back
                     }
@@ -88,7 +87,7 @@ public class Logic {
             case LEFT:
             case RIGHT:
                 for(int i = 0; i< numberCellsY; i++){ // Shift the numbers of all rows in the desired direction in turn
-                    int[] row = gameBoard.getLine(i); // Request the next row
+                    int[] row = gameBoard.getRow(i); // Request the next row
                     if(direction==Direction.RIGHT){ // reverse row
                         int[] revRow = new int[row.length];
                         for(int e = 0; e < revRow.length; e++){
@@ -105,7 +104,7 @@ public class Logic {
                         result.modRow = revRow;
                     }
                     /* Writing the changed row */
-                    gameBoard.setLine(i, result.modRow);
+                    gameBoard.setRow(i, result.modRow);
                     // If at least one line has been changed, then the whole field has been changed
                     fieldChange = fieldChange || result.theChange;
                 }

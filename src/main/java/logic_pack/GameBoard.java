@@ -31,7 +31,7 @@ public class GameBoard {
         board[i] = column;
     }
 
-    public int[] getLine(int i) {
+    public int[] getRow(int i) {
         int[] line = new int[numberCellsX];
         for (int j = 0; j < numberCellsX; j++) {
             line[j] = board[j][i];
@@ -39,7 +39,7 @@ public class GameBoard {
         return line;
     }
 
-    public void setLine(int i, int[] line) {
+    public void setRow(int i, int[] line) {
         for (int j = 0; j < numberCellsX; j++) {
             board[j][i] = line[j];
         }

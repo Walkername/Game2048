@@ -90,9 +90,9 @@ public class TestGameBoard {
         int[] line = {2, 4, 16, 1024};
         int[] line1 = {16, 128, 8, 512};
         int[] line2 = {4, 16, 1024, 256};
-        gameBoard.setLine(3, line);
-        gameBoard.setLine(0, line1);
-        gameBoard.setLine(1, line2);
+        gameBoard.setRow(3, line);
+        gameBoard.setRow(0, line1);
+        gameBoard.setRow(1, line2);
         Assert.assertEquals(2, gameBoard.getState(0,3));
         Assert.assertEquals(512, gameBoard.getState(3,0));
         Assert.assertEquals(1024, gameBoard.getState(2,1));
