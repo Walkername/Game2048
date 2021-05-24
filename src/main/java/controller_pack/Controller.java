@@ -17,11 +17,6 @@ public class Controller {
     Image imageBoard = new Image("assets/main_board.jpg");
     ImageView board = new ImageView(imageBoard);
 
-    Image wasted = new Image("assets/wasted_game.jpg");
-
-    @FXML
-    ImageView wastedGame;
-
     @FXML
     AnchorPane anchorGameBoard;
 

@@ -4,21 +4,14 @@ import java.util.Random;
 
 public class Logic {
 
-    public static int summaryScore = 0;
-    public static int score;
     public static Direction direction;
     public static final int numberCellsY = 4; // column consists of 4 cells
     public static final int numberCellsX = 4; // row consists of 4 cells
-    public static boolean endGame;
-    public static boolean number2048;
     public static GameBoard gameBoard;
 
     public static void initialState() { // state at the beginning of the game
-        endGame = false;
-        number2048 = false;
         direction = Direction.AWAITING;
         gameBoard = new GameBoard();
-        score = 0;
     }
 
     public static void logic() {
@@ -54,7 +47,6 @@ public class Logic {
                 }
             }
         }
-        score += state;
     }
 
     public static void createCells() {
@@ -103,9 +95,7 @@ public class Logic {
                         }
                         row = tmp;
                     }
-                    /*Пытаемся сдвинуть числа в этом столбце*/
                     ShiftResult result = shift(row);
-                    /*Возвращаем линию в исходный порядок*/
                     if(direction==Direction.RIGHT){
                         int[] tmp = new int[result.modRow.length];
                         for(int e = 0; e < tmp.length; e++){
@@ -164,20 +154,5 @@ public class Logic {
             }
         }
         return ret;
-    }
-
-    public static void summaryScore(GameBoard gameBoard) {
-        int[][] board = Logic.gameBoard.board;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; i++) {
-                summaryScore += board[i][j];
-            }
-        }
-    }
-
-    public static void result() {
-        if (number2048 = true) {
-            System.out.println("Victory, your score:" + summaryScore);
-        }
     }
 }
