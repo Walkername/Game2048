@@ -14,7 +14,7 @@ public class Logic {
         gameBoard = new GameBoard();
     }
 
-    public static void logic() {
+    public static void waiter() {
         if(direction != Direction.AWAITING) {
             if (checkShift(direction)) choiceCell();
             direction = Direction.AWAITING;

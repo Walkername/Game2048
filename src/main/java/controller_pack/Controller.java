@@ -45,7 +45,7 @@ public class Controller {
         if (begin) {
             anchorGameBoard.getChildren().clear();
             anchorGameBoard.getChildren().addAll(board, buttonStart);
-            Logic.logic();
+            Logic.waiter();
             draw(Logic.gameBoard);
             begin = true; // to game won't begin without initial state in method start
         }                 // until we press play it doesn't start
