@@ -116,29 +116,29 @@ public class Logic {
     public static ShiftResult shift(int[] line) {
         ShiftResult newLine = new ShiftResult();
         int[] lineNotZeroes = new int[line.length];
-        {
+        { // so as not to create another variable
             int k = 0;
-            for (int i = 0; i < line.length; i++) {
-                if(line[i] != 0){
-                    if(k != i){
+            for (int i = 0; i < line.length; i++) { // shift left
+                if (line[i] != 0) {
+                    if (k != i) {
                         newLine.theChange = true;
                     }
                     lineNotZeroes[k] = line[i];
                     k++;
                 }
             }
-            for(int i = k; i < lineNotZeroes.length; i++) {
+            for (int i = k; i < lineNotZeroes.length; i++) {
                 lineNotZeroes[i] = 0;
             }
-        }
+        } // so as not to create another variable
         newLine.modRow = new int[lineNotZeroes.length];
         {
             int k = 0;
-            {
+            { // so as not to create another variable
                 int i = 0;
-                while (i < lineNotZeroes.length) {
-                    if((i+1 < lineNotZeroes.length) && (lineNotZeroes[i] == lineNotZeroes[i + 1])
-                            && lineNotZeroes[i]!=0) {
+                while (i < lineNotZeroes.length) { // add up
+                    if ((i+1 < lineNotZeroes.length) && (lineNotZeroes[i] == lineNotZeroes[i + 1])
+                            && lineNotZeroes[i] != 0) {
                         newLine.theChange = true;
                         newLine.modRow[k] = lineNotZeroes[i] * 2;
                         i++;
@@ -148,7 +148,7 @@ public class Logic {
                     k++;
                     i++;
                 }
-            }
+            } // so as not to create another variable
             for(int j = k; j < newLine.modRow.length; j++) {
                 newLine.modRow[j] = 0;
             }
