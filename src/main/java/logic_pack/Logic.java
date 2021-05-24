@@ -60,12 +60,12 @@ public class Logic {
         switch(direction) {
             case UP:
             case DOWN:
-                for(int i = 0; i< numberCellsX; i++){
+                for(int i = 0; i < numberCellsX; i++){
                     int[] column = gameBoard.getColumn(i); // Request the next column
                     if(direction == Direction.UP){      // If direction UP then we change the order to the opposite
                         int[] revColumn = new int[column.length]; // reverse column
                         for(int j = 0; j < revColumn.length; j++){
-                            revColumn[j] = column[revColumn.length- j -1];
+                            revColumn[j] = column[revColumn.length - j - 1];
                         }
                         column = revColumn; // Get the column back
                     }
@@ -74,7 +74,7 @@ public class Logic {
                     if(direction == Direction.UP){
                         int[] revColumn = new int[result.modRow.length];
                         for(int j = 0; j < revColumn.length; j++){
-                            revColumn[j] = result.modRow[revColumn.length- j -1];
+                            revColumn[j] = result.modRow[revColumn.length - j - 1];
                         }
                         result.modRow = revColumn;
                     }
@@ -90,16 +90,16 @@ public class Logic {
                     int[] row = gameBoard.getRow(i); // Request the next row
                     if(direction==Direction.RIGHT){ // reverse row
                         int[] revRow = new int[row.length];
-                        for(int e = 0; e < revRow.length; e++){
-                            revRow[e] = row[revRow.length-e-1];
+                        for(int j = 0; j < revRow.length; j++){
+                            revRow[j] = row[revRow.length - j - 1];
                         }
                         row = revRow;
                     }
                     ShiftResult result = shift(row);
                     if(direction==Direction.RIGHT){
                         int[] revRow = new int[result.modRow.length];
-                        for(int e = 0; e < revRow.length; e++){
-                            revRow[e] = result.modRow[revRow.length-e-1];
+                        for(int j = 0; j < revRow.length; j++){
+                            revRow[j] = result.modRow[revRow.length - j - 1];
                         }
                         result.modRow = revRow;
                     }
@@ -113,46 +113,46 @@ public class Logic {
         return fieldChange; // Returns whether the field has changed or not
     }
 
-    public static ShiftResult shift(int[] oldRow) {
-        ShiftResult ret = new ShiftResult();
-        int[] oldRowWithoutZeroes = new int[oldRow.length];
+    public static ShiftResult shift(int[] row) {
+        ShiftResult newRow = new ShiftResult();
+        int[] rowNotZeroes = new int[row.length];
         {
-            int q = 0;
-            for (int i = 0; i < oldRow.length; i++) {
-                if(oldRow[i] != 0){
-                    if(q != i){
-                        ret.theChange = true;
+            int k = 0;
+            for (int i = 0; i < row.length; i++) {
+                if(row[i] != 0){
+                    if(k != i){
+                        newRow.theChange = true;
                     }
-                    oldRowWithoutZeroes[q] = oldRow[i];
-                    q++;
+                    rowNotZeroes[k] = row[i];
+                    k++;
                 }
             }
-            for(int i = q; i < oldRowWithoutZeroes.length; i++) {
-                oldRowWithoutZeroes[i] = 0;
+            for(int i = k; i < rowNotZeroes.length; i++) {
+                rowNotZeroes[i] = 0;
             }
         }
-        ret.modRow = new int[oldRowWithoutZeroes.length];
+        newRow.modRow = new int[rowNotZeroes.length];
         {
-            int q = 0;
+            int k = 0;
             {
                 int i = 0;
-                while (i < oldRowWithoutZeroes.length) {
-                    if((i+1 < oldRowWithoutZeroes.length) && (oldRowWithoutZeroes[i] == oldRowWithoutZeroes[i + 1])
-                            && oldRowWithoutZeroes[i]!=0) {
-                        ret.theChange = true;
-                        ret.modRow[q] = oldRowWithoutZeroes[i] * 2;
+                while (i < rowNotZeroes.length) {
+                    if((i+1 < rowNotZeroes.length) && (rowNotZeroes[i] == rowNotZeroes[i + 1])
+                            && rowNotZeroes[i]!=0) {
+                        newRow.theChange = true;
+                        newRow.modRow[k] = rowNotZeroes[i] * 2;
                         i++;
                     } else {
-                        ret.modRow[q] = oldRowWithoutZeroes[i];
+                        newRow.modRow[k] = rowNotZeroes[i];
                     }
-                    q++;
+                    k++;
                     i++;
                 }
             }
-            for(int j = q; j < ret.modRow.length; j++) {
-                ret.modRow[j] = 0;
+            for(int j = k; j < newRow.modRow.length; j++) {
+                newRow.modRow[j] = 0;
             }
         }
-        return ret;
+        return newRow;
     }
 }
