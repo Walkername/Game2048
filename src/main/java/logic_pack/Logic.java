@@ -56,61 +56,62 @@ public class Logic {
     }
 
     public static boolean checkShift(Direction direction) {
-        boolean ret = false;
+        boolean fieldChange = false;
         switch(direction) {
             case UP:
             case DOWN:
-                for(int i = 0; i< numberCellsX; i++){ // Shift the numbers of all columns in the desired direction in turn
-                    int[] arg = gameBoard.getColumn(i); // Request the next column
-                    if(direction == Direction.UP){
-                        int[] tmp = new int[arg.length];
-                        for(int j = 0; j < tmp.length; j++){
-                            tmp[j] = arg[tmp.length- j -1];
+                for(int i = 0; i< numberCellsX; i++){
+                    int[] column = gameBoard.getColumn(i); // Request the next column
+                    if(direction == Direction.UP){      // If direction UP then we change the order to the opposite
+                        int[] revColumn = new int[column.length]; // reverse column
+                        for(int j = 0; j < revColumn.length; j++){
+                            revColumn[j] = column[revColumn.length- j -1];
+                            System.out.println(revColumn[j]);
                         }
-                        arg = tmp;
+                        column = revColumn; // Get the column back
                     }
-                    ShiftResult result = shift(arg);  // Trying to shift numbers in this column
+                    ShiftResult result = shift(column);  // Trying to shift numbers in this column
                     /* Return the line to its original order */
                     if(direction == Direction.UP){
-                        int[] tmp = new int[result.modRow.length];
-                        for(int j = 0; j < tmp.length; j++){
-                            tmp[j] = result.modRow[tmp.length- j -1];
+                        int[] revColumn = new int[result.modRow.length];
+                        for(int j = 0; j < revColumn.length; j++){
+                            revColumn[j] = result.modRow[revColumn.length- j -1];
                         }
-                        result.modRow = tmp;
+                        result.modRow = revColumn;
                     }
                     /* Writing the changed column */
                     gameBoard.setColumn(i, result.modRow);
                     // If at least one line has been changed, then the whole field has been changed
-                    ret = ret || result.theChange;
+                    fieldChange = fieldChange || result.theChange;
                 }
                 break;
             case LEFT:
             case RIGHT:
                 for(int i = 0; i< numberCellsY; i++){ // Shift the numbers of all rows in the desired direction in turn
                     int[] row = gameBoard.getLine(i); // Request the next row
-                    if(direction==Direction.RIGHT){
-                        int[] tmp = new int[row.length];
-                        for(int e = 0; e < tmp.length; e++){
-                            tmp[e] = row[tmp.length-e-1];
+                    if(direction==Direction.RIGHT){ // reverse row
+                        int[] revRow = new int[row.length];
+                        for(int e = 0; e < revRow.length; e++){
+                            revRow[e] = row[revRow.length-e-1];
                         }
-                        row = tmp;
+                        row = revRow;
                     }
                     ShiftResult result = shift(row);
                     if(direction==Direction.RIGHT){
-                        int[] tmp = new int[result.modRow.length];
-                        for(int e = 0; e < tmp.length; e++){
-                            tmp[e] = result.modRow[tmp.length-e-1];
+                        int[] revRow = new int[result.modRow.length];
+                        for(int e = 0; e < revRow.length; e++){
+                            revRow[e] = result.modRow[revRow.length-e-1];
                         }
-                        result.modRow = tmp;
+                        result.modRow = revRow;
                     }
                     /* Writing the changed row */
                     gameBoard.setLine(i, result.modRow);
                     // If at least one line has been changed, then the whole field has been changed
-                    ret = ret || result.theChange;
+                    fieldChange = fieldChange || result.theChange;
                 }
                 break;
         }
-        return ret;
+        return fieldChange; // Returns whether the field has changed or not
     }
 
     public static ShiftResult shift(int[] oldRow) {
