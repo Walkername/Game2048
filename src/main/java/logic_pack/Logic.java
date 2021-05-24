@@ -113,46 +113,46 @@ public class Logic {
         return fieldChange; // Returns whether the field has changed or not
     }
 
-    public static ShiftResult shift(int[] row) {
-        ShiftResult newRow = new ShiftResult();
-        int[] rowNotZeroes = new int[row.length];
+    public static ShiftResult shift(int[] line) {
+        ShiftResult newLine = new ShiftResult();
+        int[] lineNotZeroes = new int[line.length];
         {
             int k = 0;
-            for (int i = 0; i < row.length; i++) {
-                if(row[i] != 0){
+            for (int i = 0; i < line.length; i++) {
+                if(line[i] != 0){
                     if(k != i){
-                        newRow.theChange = true;
+                        newLine.theChange = true;
                     }
-                    rowNotZeroes[k] = row[i];
+                    lineNotZeroes[k] = line[i];
                     k++;
                 }
             }
-            for(int i = k; i < rowNotZeroes.length; i++) {
-                rowNotZeroes[i] = 0;
+            for(int i = k; i < lineNotZeroes.length; i++) {
+                lineNotZeroes[i] = 0;
             }
         }
-        newRow.modRow = new int[rowNotZeroes.length];
+        newLine.modRow = new int[lineNotZeroes.length];
         {
             int k = 0;
             {
                 int i = 0;
-                while (i < rowNotZeroes.length) {
-                    if((i+1 < rowNotZeroes.length) && (rowNotZeroes[i] == rowNotZeroes[i + 1])
-                            && rowNotZeroes[i]!=0) {
-                        newRow.theChange = true;
-                        newRow.modRow[k] = rowNotZeroes[i] * 2;
+                while (i < lineNotZeroes.length) {
+                    if((i+1 < lineNotZeroes.length) && (lineNotZeroes[i] == lineNotZeroes[i + 1])
+                            && lineNotZeroes[i]!=0) {
+                        newLine.theChange = true;
+                        newLine.modRow[k] = lineNotZeroes[i] * 2;
                         i++;
                     } else {
-                        newRow.modRow[k] = rowNotZeroes[i];
+                        newLine.modRow[k] = lineNotZeroes[i];
                     }
                     k++;
                     i++;
                 }
             }
-            for(int j = k; j < newRow.modRow.length; j++) {
-                newRow.modRow[j] = 0;
+            for(int j = k; j < newLine.modRow.length; j++) {
+                newLine.modRow[j] = 0;
             }
         }
-        return newRow;
+        return newLine;
     }
 }
