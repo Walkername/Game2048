@@ -35,11 +35,11 @@ public class Logic {
                 gameBoard.setState(randomX, randomY, state); // then we assign it the value "2"
                 busy = true;
             }else{
-                if(randomX +1 < numberCellsX) {
+                if(randomX + 1 < numberCellsX) {
                     randomX++;
                 }else{
                     randomX = 0;
-                    if(randomY +1 < numberCellsY) {
+                    if(randomY + 1 < numberCellsY) {
                         randomY++;
                     }else{
                         randomY = 0;
@@ -61,11 +61,11 @@ public class Logic {
             case UP:
             case DOWN:
                 for(int i = 0; i< numberCellsX; i++){ // Shift the numbers of all columns in the desired direction in turn
-                    int[] arg =  gameBoard.getColumn(i); // Request the next column
+                    int[] arg = gameBoard.getColumn(i); // Request the next column
                     if(direction == Direction.UP){
                         int[] tmp = new int[arg.length];
-                        for(int e = 0; e < tmp.length; e++){
-                            tmp[e] = arg[tmp.length-e-1];
+                        for(int j = 0; j < tmp.length; j++){
+                            tmp[j] = arg[tmp.length- j -1];
                         }
                         arg = tmp;
                     }
@@ -73,8 +73,8 @@ public class Logic {
                     /* Return the line to its original order */
                     if(direction == Direction.UP){
                         int[] tmp = new int[result.modRow.length];
-                        for(int e = 0; e < tmp.length; e++){
-                            tmp[e] = result.modRow[tmp.length-e-1];
+                        for(int j = 0; j < tmp.length; j++){
+                            tmp[j] = result.modRow[tmp.length- j -1];
                         }
                         result.modRow = tmp;
                     }
